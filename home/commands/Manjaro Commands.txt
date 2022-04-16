@@ -1,0 +1,74 @@
+**** default shell is zsh ****
+
+sudo pacman -Syu - to update and upgrade the system
+sudo pacman -Syyu - to update and upgrade the system more deeply and it forces it to check for updates again&again
+pacman -Ss video player - to search for video players in database of pacman and you can install it
+pacman -Si [package_name] - to get info about a package
+sudo pacman -Sc - to remove cache and temp files from system
+sudo pacman -Rns $(pacman -Qtdq) - to remove the unused packeges and repositories which take extra space of disk
+sudo pacman -S [package_name] - to install a package
+
+sudo pacman -S vim - to install vim text editor
+
+sudo pacman-mirrors -g - to get ping of the mirror servers i.e. from where we download the packages
+
+pacman -Q - it gives a list of all installed programs
+pacman -Qs video player - to get list of installed video players in your system
+pacman -Qi [package_name] - to get info about an installed package in your system
+pacman -Qe - to see list of programs installed by the user
+pacman -Qq - to see list of all installed programs with only names and without any version-info
+pacman -Qn - list of programs installed from Main Repositories
+pacman -Qm - list of programs installed from AUR (the Arch Repo)
+pacman -Qdt - list of programs you don't need
+
+sudo pacman -R [package_name] - to remove a package
+sudo pacman -Rns [package_name] - to remove a package with its dependencies and system config files related to this package
+sudo pacman -Rs [package_name] - to completely remove a package (including its dependencies)
+
+sudo subl /etc/pacman.conf - to edit the config file of pacman
+put following in your pacman config file
+1) give colorfulness to terminal - Color
+2) to see details - VerbosePkgLists
+3) to have nice loading bar - ILoveCandy
+
+sudo subl /etc/pacman.d/mirrorlist - to see the config file of mirror-list i.e. list of servers from which packages are downloaded
+(sudo pacman-mirrors -i -c all) - it runs the mirrors servers with our internet speed and then we can choose the fastest mirror list 
+
+wc -l - it is word count for lines
+pacman -Q | wc -l - we just piped the o/p of pacman -Q inside of wc -l, this command will give no. of programs installed 
+pacman -Q > list.txt - to get list of all installed programs 
+
+alias {alias_name} - to see that alias command from our zsh config
+
+gwenview [pic_name] - to view that image
+okular [pdf_name] - to open that pdf file
+okular -p 23 [pdf_name] - to open pdf file at 23 page no.
+vlc [video_name] - to play that video file
+subl [file] - to open that file in sublime-text
+touch open.txt - to create open.txt file but not go inside it
+dolphin - to open the gui file manager
+libreoffice file.odt/.ods - to open a libreoffice documents
+date - to show date and present time
+truncate -s 0 [file_name]- to empty a file
+sox [music_file] - to play that music file - see zsh shell config, (it is actually performing command play)
+tar -xvf [file_name] - to extract that file
+
+ctrl-u - to blank the line
+
+lsblk - to see all disks internal as well as external
+
+*** how to format pendrive using terminal ***
+	step 1 - locate pendrive - lsblk
+	step 2 - unmount pendrive - umount /dev/sdb1 {here, sdb1 is name of pendrive}
+	step 3 - format it with favourite file system :-
+		  for FAT32 - sudo mkfs.vfat /dev/sdb1	
+		  for NTFS - sudo mkfs.ntfs /dev/sdb1
+		  for exFAT - sudo mkfs.exfat /dev/sdb1
+
+OR we can also use GParted tool for same purpose
+
+Basic:
+date - to show date
+cal - to show calender
+reboot - to reboot
+poweroff - to shutdown
