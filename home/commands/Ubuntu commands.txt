@@ -1,0 +1,93 @@
+pwd - display the name of my current directory on the screen
+
+cd {dir path} - change directory to that path
+cd ~ - it will take us to home directoy
+cd - typing only cd will also take us to home dircetory
+
+ls - Short listing of directory contents
+ls -a - it gives list of all contents, even the hidden files
+ls -lh - it gives properties of all files and directories in that directory
+ls -lh (file_name) - to see property of specific file in human readibility
+du -h (file or dir name) - to see disk-usage of that file or dir
+
+nano {name of txt file} - to edit that txt file in nano text-editor, nano is bulit-in text editor of terminal
+cp file1 dir1 - copy the file1 to directory dir1
+mv file1 dir1 - move file1 to directory dir1
+mv fileOld fileNew - used to rename a file from fileOld to fileNew
+
+cd -  -it goes to the directory we last were in
+cd .. - to go up a directory
+rm file1 - remove (delete) file in that directory
+mkdir {name of new directory} - make a new directory
+rmdir - remove an empty directory
+rm -rf {path of dir} - used to remove a dir which is not empty, it also deletes the files in it [BE CAREFUL WITH THE COMMAND, PUT THE PATH TO DIR 
+CAREFULLY]
+
+df -h - to get filesystem, size, etc info
+
+ping user_name - test a network connection
+sudo apt install package_name - to install a package
+sudo apt update - to get all the updates
+sudo apt upgrade - after update do this command to upgrade the packages
+sudo apt remove - to remove a installed program
+ctrl + c - to kill a on-going process
+middle click of mouse - to paste 
+clear - to clear the terminal
+wget {URL} - to download the stuff that url contain
+
+shell scripts:
+extension is - .sh
+make the script executable - sudo chmod 774 [name.sh]
+
+source .bashrc - to reinitialize the bash script
+
+apt show <package_name> | grep Size - to show size of a package
+
+uname -r - to see the version of kernel
+xrandr - to see available screen resolutions
+xrandr -s 1920x1080 - to set a specific resolution (here, 1920x1080)
+
+touch open.txt - to create open.txt file but not go inside it
+seq 10 - to print 1 to 10 on terminal
+seq 10 | xargs -I {} touch {}.txt - to create 1.txt to 10.txt in present directory
+
+subl --version - to check version of sublime text editor
+history - to see all commands used previously
+history -cw - to clear the history
+subl {file_name} - to open that file in sublime text editor (after installing sublime text editor)
+neofetch - to see system information (after you install neofetch)
+vlc {file_name} - to open a video file (after installing vlc media player)
+display file_name.jpg - to open a image 
+shotwell file_name.jpg - to open a imaeg
+play file_name.mp3 - to play audio file (after installing sox)
+evince file_name.pdf - to open a pdf file
+evince -p 23 file_name.pdf - to open pdf file at 23 page no.
+libreoffice file.odt/.ods - to open a libreoffice documents
+tmux - to start tmux (and type 'exit' to exit tmux)
+htop - to start htop
+ranger - have a terminal based file manager (and type 'q' to exit tmux)
+asciiquarium - fishes in terminal
+calender - to see what events took place in history today
+nautilus {dir_name} - to go to that directory in file manager (nautilus is my file manager) 
+
+sudo su - to be root
+
+aria2c - terminal download manager (just like fdm & idm)
+
+(dpkg --get-selections > list.txt) - command used to see all the installed packages
+
+r/cache/apt
+sudo apt clean - to clean the cache (use this command in this dir)
+
+Cache thumbnails:
+du -sh .cache/tumbnails/ - to see size of thumbnails dir
+rm -rf .cache/tumbnails/* - to delete this dir (which is not very useful)
+
+to swape esc and capslock key:
+setxkbmap -option caps:swapescape
+
+Basic:
+date - to show date
+cal - to show calender
+reboot - to reboot
+poweroff - to shutdown
