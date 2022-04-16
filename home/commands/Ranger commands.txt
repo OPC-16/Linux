@@ -1,0 +1,33 @@
+'ranger' - type in terminal to start ranger
+'q' - to quit ranger
+
+* Navigation keys *
+'h' - go left
+'l' - go right
+'j' - go down
+'k' - go up
+
+'gg' - to go to top of a dir
+'G' - to go to bottom of a dir
+
+press 'cw' - rename a file or directory
+press backspace key to show/hide Hidden files
+press spacebar key to highlight
+press 'dD' to delete a file or dir
+
+copying a file or dir:
+first press 'yy' to copy it
+then press 'pp' to paste it
+
+cutting a file or dir:
+first press 'dd' to cut it
+then press 'pp' to paste it
+
+to make dir:
+first press ';' key
+then type 'mkdir dir_name'
+
+press 'A' - to rename a file or dir from end
+press 'I' - to rename a file or dir from beginning		
+
+press 'gh' - to go to home dir
