@@ -1,0 +1,30 @@
+            program name - tmux
+
+
+**** Remember all given below commands with 'ctrl+b' are only applicable inside tmux ****
+
+tmux - to start tmux
+tmux ls - to show all active sessions
+'ctrl+b' then 'w' - to see list of all active sessions and to use the sessions
+
+pane:
+1) 'ctrl+b' then '%' - to create side-by-side pane
+2) 'ctrl+b' then '"' - to create up-down pane
+3) 'ctrl+b' then arrow-keys - to navigate between panes
+
+window:
+1) 'ctrl+b' then 'c' - to create new window
+2) 'ctrl+b' then 'p' or 'n' - to navigate windows by previous and next resp.
+3) 'ctrl+b' then 0 to 9 no. - to navigate windows by no.
+4) 'ctrl+b' then ',' - to rename a window
+
+session:
+1) 'ctrl+b' then 'd' - to detach from a session.....i.e. the session is alive in background and can be resumed
+2)tmux attach -t [session_no.] - to attach to that session
+3)tmux rename-session -t [session_no.] [your_name] - to rename a session 
+4)tmux new -s [your_name] - to start a new session and also renaming it to your_name
+5)tmux kill-session -t [session_no. (or) your_name] - to kill that specific session 
+** sessions are preserved till a reboot of machine **
+
+'ctrl+b' then '[' - to enter scroll-mode
+'q' - to exit scroll-mode
