@@ -1,0 +1,129 @@
+# Note on Image Previews
+# For those wanting image previews, like this system, there are four steps to
+# set it up. These are done automatically for LARBS users, but I will state
+# them here for others doing it manually.
+#
+# 1. ueberzug must be installed.
+# 2. The scope file (~/.config/lf/scope for me), must have a command similar to
+#    mine to generate ueberzug images.
+# 3. A `set cleaner` line as below is a cleaner script.
+# 4. lf should be started through a wrapper script (~/.local/bin/lfub for me)
+#    that creates the environment for ueberzug. This command can be be aliased
+#    in your shellrc (`alias lf="lfub") or if set to a binding, should be
+#    called directly instead of normal lf.
+
+#----- Basic vars ------------
+set shellopts '-eu'
+set ifs "\n"
+set scrolloff 10
+set icons true
+set period 1
+set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
+#set drawbox 	#to get borders
+#set previewer '~/.config/lf/scope'
+#set cleaner '~/.config/lf/cleaner'
+set info size
+#xxxxxx Basic vars xxxxxxxxxxxx
+
+#------ cmds/functions ------------
+
+cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
+
+cmd delete ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	printf "%s\n\t" "$fx"
+	printf "delete?[y/N]"
+	read ans
+	[ $ans = "y" ] && rm -rf -- $fx
+	clear && date
+}}
+
+
+# cmd extract ${{
+#    ./Scripts/extraction.sh
+# }}
+
+cmd help ${{
+	nvim ~/Downloads/Telegram\ Desktop/Linux\ Commands/lf-commands.txt
+}}
+
+cmd edit ${{
+	nvim ~/.config/lf/lfrc
+}}
+#cmd open ${{
+#    test -L $f && f=$(readlink -f $f)
+#    case $(file --mime-type $f -b) in
+#        text/*) vim $fx;;
+#		mp4/*) vlc $fx;;
+#		mkv/*) vlc $fx;;
+#		xcf/*) gimp $fx;;
+#        *) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
+#    esac
+#}}
+
+
+cmd newfold ${{
+	clear;
+    set -f
+    printf "Directory name: "
+    read newd
+    mkdir -- "$newd"
+    mv -- $fx "$newd"
+}}
+#------ cmds/functions ------------
+
+#----- General Bindings ------------
+map gg top
+map D delete
+map <c-d> push :mkdir<space>
+map <c-r> reload
+map <backspace2> set hidden!
+# map E extract 
+# map l open
+map <a-n> newfold  # it is alt+n, this is for making new dir and moving highlighted stuff in it
+map si calcdirsize 	#calculate total size of directory
+#----- General Bindings ------------
+
+# moving up&down and show size of dir
+#map j push <down>si
+#map k push <up>si
+
+# renaming ---------------------------------
+map A rename # at the very end
+map I push A<c-a> # at the very beginning
+map i push A<a-b><a-b><a-f> # before extention
+map a push A<c-u>	# deletes current name and renames
+
+# to quit
+map ZZ push q
+
+# selecting everything
+map <c-a> push <space>vk<space>
+
+#--------- movements --------------------------------
+  
+map go :{{
+	cd ~/Opc
+	select HTML
+}}
+
+map gw cd ~/Downloads/Terminal\ Wall
+
+map gd :{{
+	cd ~/Downloads
+	select Telegram\ Desktop
+}}
+
+map gt cd ~/Downloads/Telegram\ Desktop
+
+map gs  cd ~/Opc/The\ Stuff/Series
+
+map gc cd ~/.config
+#--------- movements --------------------------------
+
+# press f2 to open lf-commands.txt
+map <f-2> help
+
+# press f3 to edit lfrc
+map <f-1> edit
