@@ -1,0 +1,43 @@
+	sed - stream editor
+
+'' or "" both can be used
+sed 's/[change_this]/[change_into]/' [file_name] - to change that word in specific file (this doesn't overwrite the file)
+sed -i 's/[change_this]/[change_into]/' [file_name] - does same but writes into the file
+
+sed 's/sfd/saf/g' [file] - the g options is for global
+
+'/' - is known as the delimiter.....in sed we can change the delimiter
+so,
+	sed 's.hello.bye' ok.txt
+	sed 's hello bye' ok.txt
+	sed 's|hello|bye' ok.txt
+these are also valid commands
+
+changing delimiter helps to replace '/' in a file 	:)
+
+sed 's.hello..' [file] - this will remove hello word from file i.e. (putting nothing between demiliters removes that word)
+
+sed 's/ /\\ /g'   -> this removes spaces and replaces them with '\ '
+
+
+sed 's/sdf/jj/g;s/he/oi/g' [file] - this is how we catonate two sed commands
+sed -e 's/sdf/asf/' -e 's/sfd/i/g' - this will also catonate two commands
+
+sed "" [file_name] - just prints the file
+sed ' /[pattern]/ d' [file] - to delete the lines containing that pattern
+sed ' /[pattern]/ p' [file] - to print the lines twice containing that pattern
+sed ' /[pattern]/ q' [file] - to print the file till the pattern arrives and then quit printing
+sed ' {num} q' [file] - it prints that number of lines and quits
+sed '/pattern/s/change/into/g' [file] - first sed finds the [pattern] then in those lines change is changed in into
+
+	sed with regular expressions
+1) sed 's/#.*//g' [file] - this will delete all the comments in a file like python-file
+	. stands for any character and * for any number of characters
+2) sed 's/\s*//g' [file] - this will delete all the white space like tabs and spaces
+	\s stands for white space and * for any number of characters
+3) sed 's/\s*#.*//g' [file] - this will delete the comments and extra white space before them
+4) sed '/^$/d' [file] - this will delete the blank lines from the file
+	^ stands for start of line
+	$ stands for end of line
+5) sed 's/[A-Z]/\L&/g' [file] - replaces every uppercase into lower case
+6) sed 's/[a-z]/\U&/g' [file] - replaces every lowercase into upper case
