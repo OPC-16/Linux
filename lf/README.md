@@ -6,4 +6,4 @@
 
 It is inspired by [ranger](https://github.com/ranger/ranger), a python-written older terminal file manager.
 
-### Link to LF -> https://github.com/gokcehan/lf
+### 🔗 Link to LF -> https://github.com/gokcehan/lf
