@@ -1,4 +1,4 @@
-## Sed
+# Sed
 
 It is a stream editor for filtering and transforming text.
 

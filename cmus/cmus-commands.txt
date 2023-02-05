@@ -1,0 +1,41 @@
+C* Music ..... its a program based on C lang
+        *** it has VIM key-bindings***
+
+Enter = to play
+c = to pause
+s = to shuffle
+t = to toggle show_remaining_time
+shift+c = to toggle between continuos mode (i.e. play one song after the other or not)
+
+spacebar = to select
+shift+d = to delete the highlighted
+
+y = to add highlighted song to selected playlist
+:add [directory] - to add music in that dir
+:pl-create [name] = to create a playlist
+shift+p = to highlighted song to higher position in a playlist
+p = to highlighted song to lower position in a playlist
+r = to repeat that play-list
+^r = to repeat the current song
+ 
+e = to add highlighted song to queue
+same p, P, D options apply
+
+v = to stop playback
+b = to play next track
+z = to play previous track
+x = to restart track
+i = jump view to the currently playing track
+
+When cmus is ready to play another track (it's reached the end of a track and the "continue" setting is on) it will remove
+top entry from the queue and start playing it.
+
+sound -
++ = to increase volume
+- = to decrease volume
+[ = to increase left
+] = to increase right
+{ = to decrease left
+} = to decrease right
+
+q = to quit
