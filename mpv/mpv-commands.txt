@@ -1,0 +1,34 @@
+*** mpv is a video and audio player ***
+
+p - play/pause
+f - fullscreen toggle
+m - mute
+s - take screenshot
+q - quit without saving current state
+Q - save current state and then quit
+
+o - show progress
+O - persist show progress
+
+left & right arrows - seek 5 seconds
+up & down arrows - seek 60 seconds
+
+[ & ] - decrease and increase speed repectively
+backspace - resets the speed to normal (1x)
+
+3 & 4 - decrease and increase brightness
+9 & 0 - decrease and increase volume
+
+subtitle ->
+v - subtitle toggle (hide or unhide)
+j - next subtitle
+z - increase subtitle delay
+Z - decrease subtitle delay
+"--sub-auto=all" - put this line in ~/.config/mpv/mpv.conf to add all the subtitle files from same folder to video
+
+mouse ->
+wheel up - go forward by 10s
+wheel down - go backward by 10s
+
+_ (underscore) - to cycle through video tracks
+# (hashtag) - to cycle through audio tracks
