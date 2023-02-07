@@ -1,0 +1,154 @@
+## MODES
+Normal - hjkl to navigate
+Insert - (type i,A,s) 
+Visual - (type v) to select blocks of text
+Replace - (type R)
+
+'vimtutor' - to go to vim tutor
+
+** Navigation keys **
+'h'         - go left
+'[number]h' - go left that many characters
+'l'         - go right
+'[number]l'
+'j'         - go down
+'[number]j'
+'k'         - go up
+'[number]k'
+<shift> '{' - to go up by paragraphs
+<shift> '}' - to go down by paragraphs
+'ctrl+u' - to go up half a page
+'ctrl+d' - to go down half a page
+
+'gg' - go to top of documemt
+'G' - go to bottom of document
+'gv' - it have visually selected something and then did some other word, then press gv to select again that text
+'gU[line_argument]' - to capitalize something
+'gUU' - to capitalize the whole line
+'gu[line_argument]' - to uncapotalize something
+'guu' - to uncapitalize the whole line
+'~' - to uncapitalize or capitalize the highlighted character
+'0' - go to start of line 
+'[number]G' - go to that number
+'w' - to navigate by start of one word to start of other word
+'e' - to navigate by end of one word to end of other word
+'b' - to go backwards by start of one word to start of other word
+'[number]w' - to navigate by that number of words
+'>>' - to indent the line on which cursor is present
+
+'gf' -
+/home/omkar/Music - if we take cursor on this path of file/dir and then press 'gf' - to open that file/dir in vim
+and press '^' to return to previous file
+
+'W' - same as w but ignores the ) or ,
+'E' - same as e but ignores the ) or ,
+
+pressing ':' - enters us in command mode
+:q - to quit
+'ZZ' - capital ZZ(without :) to quit and save changes
+:q! - to quit without saving the changes
+:wq - to save changes and then quit
+':e' then press crtl+d - to see commands starting with e in command mode
+':![command]' - to execute any shell command
+
+'di{' - to delete everything inside the {} or ()
+'ci{' - to delete everything inside {} or () and go in insert mode
+'dip' - to delete the paragraph on which cursor is
+'dap'
+'diw' - to delete the word on which cursor is
+
+** setting marks **
+m{f} - to set the current position of cursor as mark and f is just its name or tag
+'{f} - to jump to mark f
+:delmarks a-zA-Z0-9 - to delete all the marks
+
+** Syntax Related **
+'=ap' - it makes the code look nice 
+
+** substitute or replace words **
+':s/{change_this}/{change_into}/g' - it will replace change_this with change_into but only for that line
+'g&' - 
+to change something globally, first run above command and then press 'g&' to replace change_this with change_into in whole document
+
+'i' - to enter insert mode on left of cursor
+'I' - to enter insert mode and go to start of line
+'a' - to enter insert mode on right of cursor
+'A' - to enter insert mode and go to end of line and upkins the line
+('A' very useful to add comment at end of line)
+'s' - to enter insert mode and delete the highlighted character
+'S' - to enter insert mode and delete the line where cursor is
+'o' - to enter insert mode and create a new line
+'O' - to enter insert mode and create a new preceeding line 
+
+Moving the screen-
+'zz' - to place the line highlighted with cursor to middle
+'zt' - to place the line highlighted with cursor to top
+'zb' - to place the line highlighted with cursor to bottom 
+
+. the use of period
+'.' - it executes the last command or doing user did
+
+esc key - to exit insert mode (it takes a slight delay)
+esc key twice - to fastly exit insert mode
+'v' - to enter visual mode from the cursor
+'V' - to enter line visual mode
+'ctrl+v' - to enter block visual mode
+esc key - to exit visual mode
+'x' - (normal mode) to detele the highlighted character
+'dw' - (normal mode) to delete the word in front of cursor
+'dd' - (normal mode) to delete (cut) a line
+'D' - (normal mode) to delete line in front of cursor
+'d$' or 'D' - (normal mode) to delete line from cursor
+'[number]dd' - to delete that many lines
+'yy' - to yank or copy entire line
+'yw' - to yank or copy a word 
+'Y' - to yank or copy a word from cursor till end of line
+'p' - to put that deleted line (take cursor to line 17, press 'p' it puts the deleted-line on line 18)
+'[number]x' - (normal mode) to delete that number of characters in front of cursor
+'u' - (normal mode) to undo
+'[number]u' - to undo that times
+ctrl 'r' - to redo
+
+** jumping motions
+ctrl 'o' - to go backward in cursor position
+ctrl 'i' - to go forward in cursor position
+
+'*' - to go to next appearence of word forward under the cursor
+'#' - to go to next appearence of word backward under the cursor
+
+'r[char]' - to replace the present highlighted character with char
+
+'cw' - to enter in change mode and to delete the word
+'cc' - to delete the whole line and be in insert mode
+'cl' - to enter in change mode and to delete the highlighted letter
+'c$' - to enter in change mode and then press '$' to delete entire line
+'C' - to enter in change mode and to delete the line in front of cursor 
+ after pressing 'c' we automatically enter insert mode 
+
+'f[char]' - to forward in that line to the char comes
+'F[char]' - to backward in that line to the char comes
+
+'t[char]' to forward in that line till that char comes
+'T[char]' to backward in that line till that char comes
+
+        *Block visual mode*
+'ctrl+v' - to enter it
+then press 'h' then do something and after pressing esc it gets applied to whole block
+
+        *Use block-visual to increment numbers*
+e.g -> [0]
+            [0]
+            [0]
+            [0]
+now 'ctrl+v' selecting the zeros, then press 'g' then 'ctrl+a'
+
+'/' - to search
+after search press enter then press 'n' - go to next occurance of that string 
+
+':earlier 10m' - takes us back in time by 10 min
+':later 5m' - takes us front in time by 5 min
+
+*** see about macros ***  https://www.youtube.com/watch?v=3eyzINMjlEk
+press q[any_key] - to start recording at that key
+press q - to stop recording
+press @[key] - to execute macro recorded in that key
