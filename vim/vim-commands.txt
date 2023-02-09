@@ -1,6 +1,6 @@
 ## MODES
 Normal - hjkl to navigate
-Insert - (type i,A,s) 
+Insert - (type i, I, A, a, o, O) 
 Visual - (type v) to select blocks of text
 Replace - (type R)
 
@@ -77,6 +77,7 @@ to change something globally, first run above command and then press 'g&' to rep
 ('A' very useful to add comment at end of line)
 's' - to enter insert mode and delete the highlighted character
 'S' - to enter insert mode and delete the line where cursor is
+'cc' - to do same as 'S'
 'o' - to enter insert mode and create a new line
 'O' - to enter insert mode and create a new preceeding line 
 
