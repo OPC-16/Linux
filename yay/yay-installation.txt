@@ -1,0 +1,14 @@
+step 1 -
+   first install base-devel and git
+step 2 -
+   go to opt/ directory
+step 3 -
+   clone the repo with this command -> sudo git clone https://aur.archlinux.org/yay-git.git
+step 4 -
+   change the owner of this cloned yay dir to user -> sudo chown -R user yay-git
+step 5 -
+   go in yay-git/ dir
+step 6 - 
+   build the package with -> makepkg -si
+
+Done :)
