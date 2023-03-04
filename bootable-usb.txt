@@ -1,0 +1,12 @@
+Create a bootable usb using the 'dd' command
+
+step 1 -
+   to find the usb name (like /dev/sdb), use command -> 'lsblk'
+
+step 2 -
+   unmount the usb using umount, if automatically mounted -> 'sudo umount /dev/sdb'   (put the proper usb name)
+
+step 3 -
+   make it bootable with -> 'sudo dd bs=4M if=/path/to/iso of=/dev/sdb status=progress oflag=sync'
+   (be absolutely sure before running this command, check proper device, because all data on that device will be destroyed, thats why 
+   people sometimes call 'dd' disk destroyer)
