@@ -1,0 +1,65 @@
+--- https://www.rapidtables.com/code/linux/gcc.html ---
+See above website for gcc syntax, options. It can also generate commands when we specify what to do
+
+dynamic link library (DLL) is for windows and shared library is for UNIX-based os
+windows -> .dll 
+linux -> .so  (shared object)
+naming convention for shared libraries -> 'lib<actual_name>.so', we can also mention the version like this 'lib<actual_name>.so.1.0'
+commands to create shared libraries ->
+1. 'g++ -Wall -fPIC -c *.cpp'
+2. 'g++ -shared -Wl,-soname,libctest.so.1 -o libctest.so.1.0 *.o'
+   -fPIC      => means "Position Independent Code", a requirement for shared libraries in Linux
+   -shared    => makes the object file created shareable by different executables
+   -Wl        => passes a comma separated list of arguments to the linker
+   -soname    => means "shared object name" to use
+   -o <my.so> => generates the so file with name my.so
+$LD_LIBRARY_PATH  -> is the path of system shared libraries
+
+nm is the tool useful for inspecting the symols inside a .so file, run 'nm file.so' this will print all symbols in that file
+   T => text section symbol
+   U => undefined symbol
+   I => indirect symbol
+to directly find all undefined symbols run -> 'nm -u file.so'
+
+Article for shared libraries -> https://gist.github.com/gubatron/32f82053596c24b6bec6
+
+
+static libraries are formed by combining many onject (.o) files together and having .a extension
+'ar -cvq stat_lib.a test1.o test2.o test3.o' -> this will create stat_lib.a static library
+
+Flags or options for g++/gcc
+-Wall -> show all the warnings
+-g -> provides debugging feature for your program. You will need this when you want to use gdb or valgrind
+--std=c++<##> -> uses version <##> of C++ when compiling, like --std=c++17
+-o <file_name> -> compiles and links files into an executable named <filename>. The default filename is a.out
+'gcc file1.c file2.c -o exefile' -> compiles file1 and file2 and forms the executable exefile
+-c -> compiles and assembles files but doesn’t link them. This is useful when building large projects to separate file compilation 
+      and minimize what is re-compiled.
+
+-------------------------- compiling with libraries (-l & -L) ---------------------------------------------
+-l links with a library file
+-L looks in a directory for library files
+'gcc -static file.c -lmath -o execfile'      -> for static linking the library file libmath.a use this cmd
+'gcc file.c -lmath -o execfile'              -> for for linking a shared library like libmath.so use this cmd
+'gcc file.c -L<dir_name> -lmath -o execfile' -> it will look in dir_name for user-defined library files to link to them
+
+-------------------------- Defining macros (-D) ---------------------------------------------
+suppose our program contains a macro like LINUX_OS, so to make this macro true we use following cmd
+'gcc -D LINUX_OS file.c -o execfile'
+
+-------------------------- Including directories (-I) ---------------------------------------------
+assume there is a header file like proj/src/myHeader.h
+now our c or cpp code is in some other dir and we have included above .h file in .c file like this #include "myHeader.h"
+when we compile our code it will give error like - myHeader.h: no such file or directory
+So, to include proj/src dir for our compilation we use -I option like following
+'gcc -Iproj/src file.c -o execfile'
+
+-------------------------- Optimizations (-O<level>) ---------------------------------------------
+legends used here -> execution-time(et), code-size(cs), memory-usage(mu), compile-time(ct)
+
+-O0       -> et, cs is more and mu, ct is less
+-O1 or -O -> et, cs is less and mu, ct is more
+-O2       -> cs becomes little less & et is much more less but mu and ct are more
+-O3       -> same as O2 but et is much more reduced and ct is increased even further
+-Os       -> cs is much reduced but ct is increased
+-Ofast    -> same as O3 but math calculations are not accurate
