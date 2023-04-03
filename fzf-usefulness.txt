@@ -1,0 +1,14 @@
+fzf -> a terminal fuzzy finder
+it outputs the path of the selected file to standard output
+
+fzf used in .zshrc as following:
+
+es () { du -a ~/Scripts/* | awk '{print $2}' | fzf | xargs -r $EDITOR }
+ec () { du -a ~/Opc/C++\ Programming/* | awk '{$1=""; print $0}' | fzf | xargs -r -I % $EDITOR % }
+
+meaning -
+du -a -> du is disk usage, it prints all (-a) files in that dir with their sizes
+awk '{print $2}' -> awk prints the contents, here it only prints the 2nd element
+awk '{$1=""; print $0}' -> it prints all elements except 1st
+fzf -> it takes input of awk and fuzzy finds the file
+xargs -> it takes std input and makes it executable, here it opens the file in $EDITOR i.e. nvim
