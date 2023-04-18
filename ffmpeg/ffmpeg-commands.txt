@@ -1,0 +1,26 @@
+1) to record the single screen without audio:
+	*	ffmpeg -f x11grab -s 1440x900 -i :0.0 out.mkv
+ this will take the default screen
+
+2) in multi-monitor -> also mention position of screen which show in output of {xrandr} command
+	*	ffmpeg -f x11grab -s 1440x900 -i :0.0+1920,0 out.mkv
+
+3) to record with audio (with alsa):
+	*	ffmpeg -f x11grab -s 1440x900 -i :0.0 -f alsa -i hw:1 out.mkv    (don't know why but this doesn't work on this pc)
+	*	ffmpeg -f x11grab -s 1440x900 -i :0.0 -f alsa -i default out.mkv 	(this works but the audio is low in loudness)
+ hw:1 is hardware no. 1 i.e. it is card number of that output
+ card number can be found out by {arecord -l} command....it gives list of all hardware audio devices like mic and speaker
+
+4) to record with audio (with pulseaudio):
+   * ffmpeg -f x11grab -s 1440x900 -i :0.0 -f pulse -ac 1 -i 0 out.mkv
+   * ffmpeg -video_size 1440x900 -framerate 25 -f x11grab -i :0.0 -f pulse -ac 2 -i 0 out.mkv
+
+	Explanation to options -
+-f -> use to take any hardware input like screen, mic, speaker
+x11grab -> command to take the screen as video input
+alsa -> command to audio as input
+-s -> screen resolution
+-i -> to take command-line arguments
+out.mkv is just the file name that we want to record in
+
+NOTE -> on Artix, the video is flickering (reason not known)
