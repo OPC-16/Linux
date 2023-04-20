@@ -1,0 +1,4 @@
+command -> ls /sys/firmware/efi/efivars
+
+after running above command, if there is some output i.e. any files are listed then it is uefi,
+other wise it is legacy
