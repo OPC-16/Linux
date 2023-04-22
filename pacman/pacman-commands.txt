@@ -1,0 +1,44 @@
+   *** pacman is the default package manager on the arch-based distributions ***
+
+sudo pacman -Syu - to update and upgrade the system
+sudo pacman -Syyu - to update and upgrade the system more deeply and it forces it to check for updates again&again
+pacman -Ss video player - to search for video players in database of pacman and you can install it
+pacman -Si [package_name] - to get info about a package
+sudo pacman -Sc - to remove cache and temp files from system
+sudo pacman -Rns $(pacman -Qtdq) - to remove the unused packeges and repositories which take extra space of disk
+sudo pacman -S [package_name] - to install a package
+
+sudo pacman -S vim - to install vim text editor
+
+sudo pacman-mirrors -g - to get ping of the mirror servers i.e. from where we download the packages
+
+pacman -Q - it gives a list of all installed programs
+pacman -Qs video player - to get list of installed video players in your system
+pacman -Qi [package_name] - to get info about an installed package in your system
+pacman -Qe - to see list of programs installed by the user
+pacman -Qq - to see list of all installed programs with only names and without any version-info
+pacman -Qn - list of programs installed from Main Repositories
+pacman -Qm - list of programs installed from AUR (the Arch Repo)
+pacman -Qdt - list of programs you don't need
+
+sudo pacman -R [package_name] - to remove a package
+sudo pacman -Rns [package_name] - to remove a package with its dependencies and system config files related to this package
+sudo pacman -Rs [package_name] - to completely remove a package (including its dependencies)
+
+-------------- pacman configurations ----------------------------------
+sudo vim /etc/pacman.conf - to edit the config file of pacman
+put following in your pacman config file
+1) give colorfulness to terminal - 'Color'
+2) to see details - 'VerbosePkgLists'
+3) to have nice loading bar - 'ILoveCandy'
+
+-------------- problem with pacman -------------------------------------
+1) failed to synchronize the databases - remove the db.lck file from /var/lib/pacman
+
+-------------- Fix Your Hipster Distro ----------------------------------
+1. a program depends on some shared library of another program, when we upgrade our system and if that program is looking for older version of that shared lib, then we can downgrade that lib's program with -
+      'sudo pacman -U /var/cache/pacman/pkg/<specific_tar_file_of_prgram_to_downgrade_to>'
+2. but again running pacman with -Syy it will upgrade that package, so to persist the downgrade, edit the /etc/pacman.conf file and look for 'IgnorePkg' line and add the name of downgraded package there
+3. but downgrading is not always good, and such problems mainly occur with AUR packages
+so easy solution is to recompile them using -
+   'yay -S <package_name>' (remember to press 'A' for clean build)
