@@ -27,6 +27,11 @@ Article for shared libraries -> https://gist.github.com/gubatron/32f82053596c24b
 static libraries are formed by combining many onject (.o) files together and having .a extension
 'ar -cvq stat_lib.a test1.o test2.o test3.o' -> this will create stat_lib.a static library
 
+--- Linking static and dll libs to create an executable (example) ---
+'g++ -o hellobeatles hellobeatles.o -L../johnpaul -L../georgeringo -ljohnpaul -lgeorgeringo'
+      [or]
+'g++ -o hellobeatles hellobeatles.o ../johnpaul/libjohnpaul.a ../georgeringo/libgeorgeringo.so'
+
 Flags or options for g++/gcc
 -Wall -> show all the warnings
 -g -> provides debugging feature for your program. You will need this when you want to use gdb or valgrind
