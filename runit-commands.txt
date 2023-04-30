@@ -1,0 +1,15 @@
+Runit is an init system used in Artix Linux 
+website -> https://wiki.archlinux.org/title/Runit
+
+Whenever we download a package its service file is put in /etc/runit/sv/<service_name>
+   sometimes we have to install that package's service file manually - eg after installing jenkins, we also have to install jenkins-runit
+
+To start a service we have to create a symlink between service's default dir and following
+   sudo ln -s /etc/runit/sv/<service_name> /run/runit/service/
+
+now this service can easily be manipilated by the 'sv' command
+
+sudo sv <start/stop/restart/status> <service_name>
+
+To remove a service
+   sudo rm /run/runit/service/<service_name>
