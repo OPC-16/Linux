@@ -31,6 +31,7 @@ link existing_file /path/to/create/new_file -> the link command creates new phys
 symbolic link :
    1st go to directory in which you want to create a symbolic link file
    'ln -s file_to_be_linked new_file' -> this will create a new file in current dir which will point to an existing file from another dir
+(remember for sym link - if any 1 file is changed, the other file is also changed)
 
 Automating stuff with entr -> https://youtu.be/9KAp_zWeI34     (http://eradman.com/entrproject/)
 
