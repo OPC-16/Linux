@@ -1,0 +1,52 @@
+fc-list -> to see all the installed fonts on the system 
+
+yay -Yc -> to remove the unneeded dependencies with help of yay
+
+chsh -s $(which zsh)  -> to change the default shell to zsh (restart after executing this)
+unrar x file_name.rar -> to open the rar file
+dirname "file_name" -> gives path of file, but if we are in same dir then it gives a dot (.)
+
+redshift -> a program to use to have night light
+
+ls /var/cache/pacman/pkg/ -> this is list of installed programs and also their previous versions
+
+## for runit
+sudo poweroff - to shutdown
+sudo reboot - to restart
+
+'xdg-mime default org.pwmt.zathura.desktop application/pdf' -> run this to make zathura default pdf viewer
+
+## accessing webcam 
+mpv /dev/video0 -> the webcam is a file named video0 so just use mpv to play it
+
+## general terminal stuff
+echo "hello" > some.txt - this puts 'hello' in some.txt file, if something is previously present then it is deleted
+echo "hello" >> some.txt - this puts 'hello' in some.txt file, but doesn't delete the previous stuff
+echo $$ - this prints the pid of the current terminal
+cp {fil1,file2,file3} /path/to/copy/ -> copies mutilple files to a dirname
+
+sudo chown -R omkar [file or dir] -> to change owner of files or dir to user name (-R is for recurvsively)
+
+link existing_file /path/to/create/new_file -> the link command creates new physical file and links the existing file with it
+symbolic link :
+   1st go to directory in which you want to create a symbolic link file
+   'ln -s file_to_be_linked new_file' -> this will create a new file in current dir which will point to an existing file from another dir
+
+Automating stuff with entr -> https://youtu.be/9KAp_zWeI34     (http://eradman.com/entrproject/)
+
+sudo ntpd -qg -> it sets the correct system time in runit sys
+sudo hwclock -w -> it sets hardware clock time with system clock time (use only when bios ie hw time is wrong)
+
+install 'webp-pixbuf-loader' package for viewing webp images in ristretto (default xfce image viewer)
+
+---------- To see if we are using x11 or wayland ------------
+'loginctl' -> first run this and note the session_id
+'loginctl show-session <session_id> -p Type' -> this will output something like this - Type=x11
+
+-------------- Fix Your Hipster Distro ----------------------------------
+1. a program depends on some shared library of another program, when we upgrade our system and if that program is looking for older version of that shared lib, then we can downgrade that lib's program with -
+      'sudo pacman -U /var/cache/pacman/pkg/<specific_tar_file_of_prgram_to_downgrade_to>'
+2. but again running pacman with -Syy it will upgrade that package, so to persist the downgrade, edit the /etc/pacman.conf file and look for 'IgnorePkg' line and add the name of downgraded package there
+3. but downgrading is not always good, and such problems mainly occur with AUR packages
+so easy solution is to recompile them using -
+   'yay -S <package_name>' (remember to press 'A' for clean build)
