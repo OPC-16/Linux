@@ -1,0 +1,368 @@
+----------------------------- NOTES -------------------------------------------------------------------
+1. HEAD is the pointer to the current branch reference, which is in turn a pointer to the last commit made on that branch. 
+That means HEAD will be the parent of the next commit that is created. It’s generally simplest to think of HEAD as 
+the snapshot of your last commit on that branch.
+2. The index is your proposed next commit. We’ve also been referring to this concept as Git’s “Staging Area” as this is what Git 
+looks at when you run git commit.
+3. Finally, you have your working directory (also commonly referred to as the “working tree”) Think of the working directory as 
+a sandbox, where you can try changes out before committing them to your staging area (index) and then to history.
+
+Whereas reset will move the branch that HEAD points to, checkout will move HEAD itself to point to another branch
+
+1. To compare your result to what you had in your branch before the merge, in other words, to see 
+what the merge introduced, you can run 'git diff --ours'
+2. If we want to see how the result of the merge differed from what was on their side, you can run 'git 
+diff --theirs'
+3. Finally, you can see how the file has changed from both sides with 'git diff --base'
+4. git checkout --conflict=diff3 fileName -> Git will use a slightly different version of conflict markers, not only giving you the "ours" and "theirs" versions, but also the "base" version inline to give you more context
+5. When you run git diff directly after a merge conflict, it will give you information in a rather unique diff output format 
+called "Combined Diff"
+
+Rerere functionality
+The name stands for “reuse recorded resolution” and, as the name implies, it allows you to ask Git to remember how you’ve resolved a
+hunk conflict so that the next time it sees the same conflict, Git can resolve it for you automatically.
+'git config --global rerere.enabled true' -> this will enable the rerere globally
+Now when we fix a merge conflict between 2 branches for one file conflicted, rerere will remember how we fixed that specific file and if
+next time same file conflicts rerere will fix it automatically
+
+Git Bundle
+it is a method to transfer our work to some other person by offline means. It creates a binary file, then this file can be transfered 
+by email or USB. Then unbundle it in repo git will automatically do all the commits, etc
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxx NOTES xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+'git status' -> it shows the status of all files, whether updated or untracked
+'git status --ignored' -> lists all ignored files
+'git status -s' -> for shorter git status, show M for modified and ? for untracked files
+
+'git add [file_name]' -> to add the file to staging area i.e. it is updated in git
+'git add .' -> to add all the files in one command
+'git add -i' -> for interactive add command
+'git add -p file_name' -> it is used to put only specific changes in staging area (p for patch), we can select which 
+                        hunk to add in current commit (hunk - a changed chunk of code)
+
+git restore file_name [or] git checkout -- file_name -> it unmodifies the modified file, the modified changes are permanently gone
+
+'git commit -m "message" -m "description"' -> to commit i.e. save all the changes to git
+'git commit -am "message" -m "description"' -> to add and commit at same time, but this only works for modified files
+'git commit --amend -m "new_corrected_message"' -> this updates the message on the last commit, we can also include some left out 
+                                                   unstaged files with this amend flag (1st git add them and do amend), but this 
+                                                   only works if we haven't pushed our code to a remote repo
+'git commit' -> it we don't put options as -m then text-editor will open and there we can put out commit message, write title on first
+                line and then leave a blank line then we add a description to that titile
+Editing last commit 
+Only edit commit message -> 'git commit --amend'
+For files, change the files and stage them and then run 'git commit --amend', this will put newly staged files and will open text editor to edit the commit message
+If only want to change files and not the commit message run 'git commit --ammend --no-edit'
+
+'git branch' -> to see all the branches in the repo, and see on which branch we are currently
+'git branch --all' -> lists all branches including the remote ones
+'git branch -v' -> to see all branches and their respective last commits
+'git branch [branch_name]' -> to create a new branch of name [branch_name]
+'git branch braName origin/main' -> this will create a new branch braName which will be based on origin's main branch
+'git branch -d [branch_name]' -> this deletes the branch specified
+'git branch -M Main' -> to rename the Master branch to Main
+'git branch --merged' -> this gives list of branches which are merged into the branch you are on
+'git branch --no-merged' -> list of branches whose work is not been merged yet, deleting such bra will give error, to force the deletion 
+                            use the -D instead of -d
+To change branch name on a remote :
+   1. 'git branch --move old_bra_name new_bra_name' -> to locally change a branch name
+   2. 'git push origin new_bra_name' -> change branch name on the remote
+   3. 'git push origin --delete old_bra_name' -> this will delete the old branch name from the remote
+
+'git push origin master' -> it puts our local code in remote repo, origin is to where to push and master is the branch name to be pushed
+'git push [remote-name] --delete [branch-name]' -> delete a remote branch
+'git push origin v1.1' -> this pushes 'v1.1' tag to origin
+'git push origin --tags' -> this pushes all the tags to the remote
+'git push origin ourLocalBra:remote_already_bra' -> this will push work of ourLocalBra to the already present bra on remote
+                                                   (remember this doesn't push the branch but that bra's work)
+
+'git checkout -b [name]' -> to create a new branch of name [name] and go in that branch
+'git checkout -b feature-bra origin/feature-bra' -> will create feature-bra locally and this bra will have origin's feature-bra as its
+                                                    upstream
+'git checkout branch_name' -> to go to that branch
+'git checkout -' -> to go to the previous branch
+'git checkout 789abcd' -> To temporarily jump back to that commit
+'git checkout --conflict=diff3 fileName' -> git will use slightly different conflict markers and will 'ours', 'theirs' & 'base' diffs for
+                                           more context to resolve a merge conflict
+
+'git diff' -> This will show the unstaged changes on the current branch from the commit before it
+'git diff --staged' {or} 'git diff --cached' -> This will show the changes between the previous commit and the currently staged files
+'git diff [branch_name]' -> to see changes between current branch and [branch_name]
+'git diff [commit_hash_1]..[commit_hash_2]' -> shows changes between two commits (.. is kind of an operator)
+'git diff original new' {or} 'git diff original..new' -> shows changes between new and original branches
+'git diff myfile.txt' -> to show differences in a file
+'git diff dir_name' -> also works with directories
+'git diff 27fa75e ada9b57 myfile.txt' -> difference in file betwn two commits
+'git diff 27fa75e myfile.txt' -> To show the difference between some version of a file in a given commit and the local HEAD version
+'git diff HEAD~1 HEAD' -> changes betwn previous and current commit
+'git diff --ours' -> will give what we had in our bra before the merge happened
+'git diff --theirs' -> result of merge differed from what was on their side
+'git diff --base' -> to see files changed from both sides
+
+      (also see the 'find & search' section for git log's more options)
+'git log' -> this lists all the commits and gives each commit a specific id
+'git log --all' -> this lists commits from all branches
+'git log --graph --oneline --decorate' -> to see more comsize and eye-apealing the commit history
+'git log --all --grep "some_pattern"' -> to search for pattern in all commits in all branches
+'git log -p' -> shows the difference (the patch output) introduced in each commit
+'git show [commit_hash]' -> to show details of that commit 
+'git log --abbrev-commit' -> this shortens the commit hash while showing the log history
+'git shortlog' -> lists commits with committer in chronological order
+'git shortlog main --not last_tag_name' -> this will give summary of all commits that happened after the last tag and it will be grouped
+                                           by author
+
+'git remote set-url origin https://Url' -> set new Url to existing remote
+'git remote -v' -> this shows all the remote repos 
+'git remote add origin https://Url' -> this will link the local repo in out computer to the remote repo
+'git remote rename origin destination' -> rename remote from origin to destination
+'git remote show origin' -> gives info about the remote repo
+'git remote remove origin' -> removes the origin remote
+
+'git clone //Url' -> this will do a regular clone of the repo
+'git clone //Url MyRepo' -> this will create a directory mYRepo and clone in it
+'git clone --recursive //Url' -> this will clone and also pull all the submodules in that repo
+'git clone //Url -b braName'  -> this will directly checkout that branch
+
+'git fetch [remote-name]' --prune -> If a remote branch has been deleted, local repo has to be told to prune the reference to it
+'git pull origin master' -> it pulls the remote code into our local git repo, pull helps to update our local repo with the remote repo,
+                            pull is a combination of 'git fetch' and 'git merge origin/main'
+'git pull --rebase remote-name branch-name' -> to update local repo from upstream remote with rebasing
+'git pull  --recurse-submodules' -> this pulls commits of main project as well as updates made in submodules
+
+'git rm --cached <file>' -> If a file is already added to your Git repository and now we want to stop tracking it (so that it won't be present in future commits). The --cached option will make sure that the file is not physically deleted
+
+git update-index --assume-unchanged my-file.txt -> here subsequent changes in file are ignored also file is NOT removed from git
+
+'git format-patch -M origin/main' -> this will create a patch file of the last commit, this patch file will include info about the 
+                                    commit and also the diffs, these files were used for pull requests in earlier days
+
+git config --global alias.lol "log --decorate --oneline --graph" -> this is how we create aliases for git commands
+git config --global core.excludesfile <Path_To_Global_gitignore_file> -> make files in different repos ignore by git (globally)
+
+-------------------- undoing -------------------------------------------------------------------
+'git reset [file_name]' -> to undo the staging of file i.e. unstage a staged file
+'git reset' -> to undo staging of all files
+'git reset HEAD~1' -> to undo a commit by one i.e. to go the previous commit, and the changes are unstaged
+'git reset commit_hash' -> to undo all the changes till that commit, here also the changes are unstaged i.e. we can see still see those
+                           changes in files but they are not staged
+'git reset --soft 789abcd' -> To roll back to a previous commit while keeping the changes
+'git reset --hard 789abcd' -> To permanently discard any changes made after a specific commit
+'git reset --soft HEAD~' -> to rollback to last committed state but preserving the files
+'git reset --hard HEAD~' -> same as above but will delete the files
+
+Undoing merges =>
+If the unwanted merge commit only exists on your local repository, the easiest and best solution is to move the branches so that they
+point where you want them to.So we will use 'git reset --hard HEAD~'
+
+-------------------- .gitignore -------------------------------------------------------------------
+this is a file in which we put names of files that we don't want git to track them.we can also put it's own name i.e. .gitignore inside itself to not to track it.
+'git check-ignore' {or} git status --ignored -> to list files ignored by git
+
+-------------------- detached HEAD state ------------------------------------------------------------
+in this state if we create a commit then that commit will not be show on any branch and can only be accessed by that commit_hash, so 
+best way is to create a branch which can save our work 
+'git switch -c <new-branch-name>' -> this creates new branch
+
+-------------------- git rebase option -------------------------------------------------------------------
+Let's say a developer who is working on a new feature on a dedicated branch. Then, another development team member updates the main branch with some new commits.
+
+                            ----#---#---#    this is new feature branch
+                           /
+                     *--*---+----+           this is main branch (* are old commits, + are new commits)
+Eventually, however, the team concludes that the main's new commits are relevant to the feature you are working on. So then, if you want to incorporate the new commits onto your branch, you can either do a merge or a rebase. If you decide to use Git merging, you tack on the new commits to your new branch like this:
+
+                            ----#---#---#  
+                           /      _____/
+                          /      /
+                     *--*----+---+         it directly adds new commits to feature, and branch's base is same
+However, if you use Git rebase, you move your whole feature branch, starting it on the tip of the main branch so that all the new commits are now part of the whole. This action rewrites the project history by making new commits for each of the original branch's commits. So, this is how the new branch looks:
+
+                                   ----#---#---#
+                                  /
+                     *--*---+----+                 the base is shifted to latest commit so new commit's changes are automatically added
+   1. on go dev branch -> 'git checkout dev'
+   2. rebase it with main -> 'git rebase main' [or] 'git merge main'
+   2. 'git rebase main feature-bra' -> rebase the feature branch onto the master branch without having to check it out first
+      after this main will be pointing to lastest + and dev to lastest #, to fast-forward main bra and to include dev's changes in main -
+   3. 'git checkout main' 
+   4. 'git merge dev'
+      3 & 4 are known as fast-forwarding the main branch so that it includes the other bra's change
+   (rebase local changes before pushing to clean up our work, but never rebase anything that you've pushed somewhere)
+
+
+-------------------- putting local repo on remote platform like github ------------------------------
+do the ssh keys things --> https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux
+
+then create an empty repo with same name in your local computer
+
+'git remote -v' -> this shows all the remote repos 
+'git remote add origin [github link to empty repo]' -> this will link the local repo in out computer to the remote repo
+                                                       also, the word 'origin' is just convention, we put whatever we want, it is 
+                                                       used to refer to that remote repo
+
+'git push origin master' -> it puts our local code in remote repo, origin is to where to push and master is the branch name to be pushed
+'git pull origin master' -> it pulls the remote code into our local git repo, pull helps to update our local repo with the
+                            remote repository
+
+-------------------- collaboration (directly changing the repo)-------------------------------------
+we can have our colleagues and friends as collaborators (whom we trust)
+
+To add a collaborator -
+   - go to setting of that repo
+   - then go to manage access
+   - then invite a collaborator, which will send an email to that person
+
+-------------------- open-source contribution -------------------------------------------------------------------
+go to that repo in which you want to contribute
+then fork it, this will create a copy of that repo in your github account
+then git clone this copied repo
+then edit the code
+then go to contribute tab of forked repo to create a pull request
+then this will send a merge request to the owner of that original repo
+
+** we cannot push an empty directory to the remote
+
+-------------------- interactive rebase -------------------------------------------------------------------
+A handsOn website where git's rebase is taught -> https://git-rebase.io/
+used to clean and tidy the commit history (eg clean commit history of feature branch before merging it into shared team branch)
+
+'git rebase -i HEAD~3'
+   it takes last 3 commits opens text-editor and from there we can do few things like - rework,squash,etc
+   1. to change commit-message - then type 'rework' instead of 'pick' in front of commit which message we want to change, 
+      then save and quit editor, Then again a editor will open and now we can edit the commit message here, save and quit
+   2. to combine 2/more commits - type 'squash' in front of a commit, here this commit and the one above it will be combined,
+      save & quit, then again another editor will open for you to enter new commit message for combined commit
+
+Remember - in 'git log' the latest commit it on top, while in editor of rebase the latest commit is at top (ie the order is reversed)
+
+-------------------- rebase or merge a branch with main -------------------------------------------------------------------
+suppose we have to rebase/merge the 'dev' branch with 'main'
+1. on go dev branch -> git checkout dev
+2. rebase it with main -> git rebase main [or] git merge main
+
+-------------------- cherry picking -------------------------------------------------------------------
+We use 'merge' or 'rebase' to integrate all new commits from 1 branch to current branch
+if we only want a specific commit to be added then we use 'cherry picking' (but still it is not that used)
+
+best case to use cherry-picking -> by mistake we commited into main instead of a feature branch then to get that commit in feature 
+                                   branch we use cherry-picking
+
+1. copy the commit hash that you want to copy it in feature bra
+2. 'git checkout feature-branch' - go to the feature bra
+3. 'git cherry-pick [commit_hash]' - it will make copy of that commit in this feature branch
+4. if you want to delete that commit from main then 'git checkout main' and then 'git reset --hard HEAD~1' this will hard reset to 
+                                                                                 previous commit in main
+
+-------------------- git reflog -------------------------------------------------------------------
+It is a journal that git maintains about the main things like commit, checkout, merge, rebase, cherry-pick, reset
+The latest events are at top
+
+perfect usecase - we deleted some commits and then realised that it was bad idea, so to recover those commits we use reflog
+1. first delete some commits with 'git reset --hard HEAD~3' (just to test)
+2. 'git reflog' -> to see all the events, the latest will a 'reset' event which we just did
+3. copy its event_hash of the state before reset
+4. 'git reset --hard [event_hash]' - to restore those commits
+   or
+4. create a new branch - 'git branch happy-ending [event_hash]'
+
+Remember- the event_hash is nothing but commit hashes
+
+-------------------- submodules -------------------------------------------------------------------
+there are libraries and external files which our project requires, so we can either copy and paste them in our repo and manage them 
+manually or create a submodule, it is a git repo inside a git repo
+
+1. first create a lib/ directory to store our libraries
+2. cd lib/
+3. 'git submodule add https://url' - this will git clone the remote repo in lib/ as a submodule
+   also a .gitmodules file is created in project's root dir
+4. then we have to commit this change
+
+when cloning someone else's repo with 'git clone Url' it doesn't populate the submodule folders, so to fix that -
+   1st way -> cd into that cloned repo and run 'git submodule update --init --recursive' this will copy all submodule files in right 
+               place in repo
+   2nd way -> just use 'git clone --recurse-submodules https://url' this will do regular git clone and also copy submodules
+
+Also, for any repo our checked out revision is the latest commit in that branch and adding new commits, it automatically makes the 
+latest commit as checked out revision. And for submodules they are always checked out on a specific commit coz contents of branch 
+can change overtime as new commits arrive, but we don't want that and submodules are just libraries. So, even if maintainer 
+of that library ships some great update we don't know that it might break our code, so we always want a chosen version checked out
+
+-------------------- find & search (filter commit history) ---------------------------------------
+(by date)
+'git log --after="2021-7-1"' -> shows all commits after 1st July 2021
+'git log --before="some_date"'
+(by pattern)
+'git log --all --grep "some_pattern"' -> to search for pattern in all commits in all branches
+'git log --grep="some_pattern"'
+(by author)
+'git log --author="author_name"' -> to search by author's name
+(by file)
+'git log -- <file_name>' -> to see all commits happened on that file
+(commits in feature bra)
+'git log branch_name..main' -> this will show commits that are in main and NOT in branch_name branch
+'git log main --not branch_name' -> this is same as above
+'git log origin/main..HEAD'  -> this will give list of commits that will be pushed to remote on next git push
+'git log refA refB --not refC' -> to see commits that are reachable from refA and refB but not from refC
+'git log main...experiment'  -> this shows commits in both main and experiment but not the commits that are common to both
+'git log --left-right main...experiment' -> same as above only '<' will appear for commits of main and '>' for commits of experiment
+'git log -S find_pattern --oneline' -> this find find_pattern in the commit history and where it was Used
+
+-------------------- tags ------------------------------------------------------------
+tags are used to mark specific points in repo's history as being important.Typically, used to mark release points like v1.0, v2.0 and so on
+There are 2 types of tags - 
+      1. lightweight - it does not have any info, is just a pointer to specific commit
+      2. annotated - it stores info such as tagger name, email, date and can also have a tagging message
+   --to create annotated tag
+'git tag -a v1.0 -m "my version 1.0"' -> this creates an annotated tag of name 'v1.0' and with that message in ""
+'git show v1.0' -> this will show info about that tag
+   --to create lightweight tag
+'git tag v1.1' -> don't supply any options just the tag name, and if we run git show on this tag this will just give the commit's info
+   --creating tag of previous commits
+'git tag -a v1.2 commit_hash' -> this will create annotated tag the that commit which is in past
+   --pushing tags
+'git push origin v1.1' -> this pushes v1.1 tag to origin
+'git push origin --tags' -> this pushes all the tags to the remote
+   --deleting tags
+'git tag -d v1.0' -> to delete that tag only in local repo not on remote
+'git push origin --delete <tagname> [OR] git push origin :refs/tags/v1.4-lw' -> to delete that tag from remote
+   --checking out tags
+'git checkout v1.0' -> this will put us in detached HEAD state, so we can create new branch with 'git switch -c braName' which can save 
+                        the changes we will make while on this v1.0 tag
+'git checkout -b version2 v2.0.0' -> or just create a new branch and then checkout that tag, but doing so version2 branch will be 
+                                 slightly different than our v2.0.0 tag since it will move forward with your new changes, so be careful
+'git tag' -> this will show all the tags but only their names are seen
+'git show --tags' -> this will all tags with the commits they are pointing to, etc
+
+-------------------- Build Number and preparing a release -----------------------------------------------
+'git describe main' -> this will generate a build number i.e. a string with name of most recent tag earlier than that commit,followed 
+                       by the number of commits since that tag, followed finally by a partial SHA-1 value of the commit being described 
+                       (prefixed with the letter "g" meaning Git)
+now to prepare a release we will create .tar.gz or .zip files
+"git archive main --prefix='project/' | gzip > `git describe master`.tar.gz" -> this will generate a tar file with name as same as 
+                                                                                 build number
+"git archive master --prefix='project/' --format=zip > `git describe master`.zip" -> this will same as above only a zip file
+
+-------------------- Git Clean -----------------------------------------------------------------------
+It is used to remove the untracked files
+'git clean -f -d' -> this removes all the untracked files, the emptied subdirectories and -f means force
+'git clean -d -n' -> -n option does a dry run and will tell us which files will be deleted
+'git clean -d -f -x' -> x option will tell to remove the files which are mentioned in .gitignore
+
+-------------------- Rerere -----------------------------------------------------------------------
+'git config --global rerere.enabled true' -> to globally enable rerere
+'git rerere status' -> name of files which rerere has remembered how to resolve the conflicts for
+'git rerere diff' (run this before fixing a conflict for new file)
+(after fixing the conflict with new file, if we again run 'rerere diff', the outputted resolution will be remembered by it )
+
+-------------------- Git Blame -----------------------------------------------------------------------
+if there is a bug in code we can see when that line was introduced in file with git blame
+'git blame <fileName>' -> will show all lines of that file with some info like -partial SHA of commit that last modified that line, name 
+                        of committer, date. Also if there is '^' before a partial SHA for a specific line that means that was hasn't been
+                        modified after when it was first introduced in repo's initial commit (i.e. 1st commit of repo)
+'git blame -L 23,30 <fileName>' -> this will limit above result for lines between 23 to 30
+'git blame -C <fileName>' -> if we divied 1 big file into smaller parts and ran git blame on some part file, then Git can tell us from
+                              which big file that specific line came
+
+-------------------- Git Bisect -----------------------------------------------------------------------
+1. There is an issue and you don’t know what is breaking, and there have been dozens or hundreds of commits since the last state where you know the code worked. The bisect command does a binary search through your commit history to help you identify as quickly as possible which commit introduced an issue.
+2. First you run git bisect start to get things going, and then you use git bisect bad to tell the system that the current commit you’re on is broken. Then, you must tell bisect when the last known good state was, using git bisect good <good_commit>
