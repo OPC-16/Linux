@@ -1,0 +1,34 @@
+Good PR, Good md and Get involved
+
+1. Get proper idea of what is added and removed (for pull request)
+{
+```diff
+- this line will be in red (i.e. removed)
++ this line will be in green (i.e. added)
+```
+}
+
+2. automatically close the related issue after your PR is merged, write following PR message ->
+{
+closes #issue_number
+
+description
+}
+
+3. replying to someone who has posted few ideas and we agree with some and not with some, to clearly tell about that is our job, write like this in reply (the '>' will quote in markdown) ->
+{
+> idea 1
+I agree with this one
+
+> idea 2
+I don't agree with this
+}
+
+4. always keep the PR small, consize and must add value to project
+
+5. If we want to get feedback on our work sooner then create PR sooner, but if the work of PR is in progress then we can use 'convert to draft' option, this will help maintainer to give us feedback but not review our work. Along with draft option also have a 'checklist option' is our PR's msg like 
+- [] item 1 incomplete
+- [x] item 2 complete      (this will show a tick mark when rendered)
+this will show a kind of progress bar for the completeness of our work in that PR
+
+6. get involved in the conversations, reply to an issue, review someone's PR and give your thoughts -> this will help people to get to your github profile, so keep your profile's readme good
