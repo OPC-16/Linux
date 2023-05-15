@@ -98,3 +98,4 @@ ex	
 *.gitattributes	
 *.gitconfig	
 *.github	
+*.go 
