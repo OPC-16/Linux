@@ -34,6 +34,7 @@ static libraries are formed by combining many onject (.o) files together and hav
 
 Flags or options for g++/gcc
 -Wall -> show all the warnings
+-w -> to inhibit all the warnings
 -g -> provides debugging feature for your program. You will need this when you want to use gdb or valgrind
 --std=c++<##> -> uses version <##> of C++ when compiling, like --std=c++17
 -o <file_name> -> compiles and links files into an executable named <filename>. The default filename is a.out
