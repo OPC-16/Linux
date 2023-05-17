@@ -40,6 +40,13 @@ sudo hwclock -w -> it sets hardware clock time with system clock time (use only 
 
 install 'webp-pixbuf-loader' package for viewing webp images in ristretto (default xfce image viewer)
 
+---------- makepkg ------------------------------------------
+makepkg -sirc
+-s –> installs any missing dependencies using the package manager
+-i –> installs the package after it has been built
+-r –>removes any dependencies required by the build process that aren’t required afterwards
+-c –> cleans up any leftover work files or directories created during the build process
+
 ---------- To see if we are using x11 or wayland ------------
 'loginctl' -> first run this and note the session_id
 'loginctl show-session <session_id> -p Type' -> this will output something like this - Type=x11
