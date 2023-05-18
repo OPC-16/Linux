@@ -14,6 +14,8 @@ ls /var/cache/pacman/pkg/ -> this is list of installed programs and also their p
 sudo poweroff - to shutdown
 sudo reboot - to restart
 
+ps --no-headers -o comm 1 -> prints the init system we are using
+
 'xdg-mime default org.pwmt.zathura.desktop application/pdf' -> run this to make zathura default pdf viewer
 
 ## accessing webcam 
